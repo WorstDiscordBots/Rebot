@@ -1,0 +1,7 @@
+token = "replacewithyourtoken"
+prefix = "/"
+initial_modules = []
+
+# Keys
+giphy_key = "putavalidgiphykeyhere"
+tenor_key = "putavalidtenorkeyhere"
