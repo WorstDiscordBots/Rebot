@@ -1,6 +1,6 @@
 token = "replacewithyourtoken"
 prefix = "/"
-initial_modules = []
+initial_modules = ["global_events", "discord"]
 
 # Keys
 giphy_key = "putavalidgiphykeyhere"
