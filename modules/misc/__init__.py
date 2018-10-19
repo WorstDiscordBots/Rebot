@@ -29,8 +29,13 @@ class Misc():
         embed = discord.Embed(color=0xFFD00D)
         embed.add_field(name="About the bot", value="Rebot is a bot for all the mobile user needs. It's main goal to provide the desktop client's benefits for everyone.", inline=False)
         embed.add_field(name="Bot pfp", value="Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com", inline=False)
-        embed.add_field(name="Third-party libs", value="```• discord.py - MIT license\njishaku - MIT license\naiohttp - Apache License 2.0\nujson - BSD license```", inline=False)
+        embed.add_field(name="Third-party libs", value="```• discord.py - MIT license\n• jishaku - MIT license\n• aiohttp - Apache License 2.0\n• ujson - BSD license```", inline=False)
         await ctx.send(embed=embed)
+
+    @commands.command(name="ping")
+    async def _ping(self, ctx):
+        """Pong! Shows you the bot websocket latency"""
+        await ctx.send(f"Pong! That took `{round(self.bot.latency * 1000, 2)}` ms.")
 
 def setup(bot):
     bot.add_cog(Misc(bot))
