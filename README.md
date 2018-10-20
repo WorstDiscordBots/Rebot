@@ -1,5 +1,6 @@
-
 # Rebot
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FWorstDiscordBots%2FRebot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FWorstDiscordBots%2FRebot?ref=badge_shield)
+
 Rebot is a small bot originally written by @Diniboy1123 for a request to help mobile users invoke the built-in Discord client commands.
 
 It currently has all the Discord client commands (`/tts`, `/me`, `/tableflip`, `/nick`, `/giphy`, `/xivdb`) except tenor, but it'll come soon too.
@@ -12,3 +13,7 @@ However if you really want to host it, you will need Python 3.5 (or higher) and 
  - `pip install -r requirements.txt`
  - Rename the example `config.py.default`  file to `config.py` and insert all your tokens there
  - Do `python3 Rebot.py` (or it can be `python Rebot.py` under some installations)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FWorstDiscordBots%2FRebot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FWorstDiscordBots%2FRebot?ref=badge_large)
