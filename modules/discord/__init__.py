@@ -21,7 +21,8 @@ try:
 except ImportError:
     from json import loads
 import discord
-import secrets # maximum random gifs
+
+from secrets import choice  # maximum random gifs
 
 from discord.ext import commands
 
@@ -36,8 +37,6 @@ class Discord():
             "shrug": "¯\_(ツ)_/¯",
             "unflip": "┬─┬ ノ( ゜-゜ノ)"
         }
-        async with bot.session.get(f"https://api.tenor.com/v1/anonid?key={bot.config.tenor_key}") as r:
-            self.anon_id = loads(await r.text())["anon_id"]
 
     @commands.command(name="tts")
     async def _tts(self, ctx, *, shout: commands.clean_content):
@@ -134,7 +133,7 @@ class Discord():
         params = {
             "key": self.bot.config.tenor_key,
             "q": query,
-            "anon_id": self.anon_id,
+            "anon_id": self.bot.anon_id,
             "limit": 50, # we wanna get the maximum tenor results to choose a random one
         }
         async with self.bot.session.get(f"https://api.tenor.com/v1/search", params=params) as req:
@@ -144,7 +143,7 @@ class Discord():
         results = response.get("results")
         if not results: # list has length of 0 or is not even in the json
             return await ctx.send("No results", delete_after=10)
-        await ctx.send(secrets.choice(results)["url"]) # get a truly randomly chosen gif
+        await ctx.send(choice(results)["url"]) # get a truly randomly chosen gif
 
     @commands.command(name="xivdb")
     async def _xivdb(self, ctx, *, query: str):
