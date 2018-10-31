@@ -137,7 +137,7 @@ class Discord():
             "anon_id": self.anon_id,
             "limit": 50, # we wanna get the maximum tenor results to choose a random one
         }
-        async with self.bot.session.get(f"https://api.tenor.com/v1/search?q=pat&key={key}&limit=50&anon_id={anonid}") as req:
+        async with self.bot.session.get(f"https://api.tenor.com/v1/search", params=params) as req:
             if req.status != 200:
                 return await ctx.send(f"Error! The server returned a `{req.status}` code.")
             response = loads(await req.text())
