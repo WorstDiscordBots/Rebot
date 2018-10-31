@@ -21,6 +21,9 @@ try:
 except ImportError:
     from json import loads
 import discord
+
+from secrets import choice  # maximum random gifs
+
 from discord.ext import commands
 
 from utils import remove_mentions
@@ -38,7 +41,7 @@ class Discord():
     @commands.command(name="tts")
     async def _tts(self, ctx, *, shout: commands.clean_content):
         """Text to speech
-        
+
         Pretty annoying isn't it?
         """
         if not ctx.channel.permissions_for(ctx.guild.me).send_tts_messages and not ctx.channel.permissions_for(ctx.guild.me).manage_webhooks:
@@ -123,6 +126,24 @@ class Discord():
         if not response.get("data") or not response["data"][0].get("url"):
             return await ctx.send("No results", delete_after=10)
         await ctx.send(response["data"][0]["url"])
+
+    @commands.command(name="tenor")
+    async def _tenor(self, ctx, *, query: str):
+        """Search more animated GIFs on the web"""
+        params = {
+            "key": self.bot.config.tenor_key,
+            "q": query,
+            "anon_id": self.bot.anon_id,
+            "limit": 50, # we wanna get the maximum tenor results to choose a random one
+        }
+        async with self.bot.session.get(f"https://api.tenor.com/v1/search", params=params) as req:
+            if req.status != 200:
+                return await ctx.send(f"Error! The server returned a `{req.status}` code.")
+            response = loads(await req.text())
+        results = response.get("results")
+        if not results: # list has length of 0 or is not even in the json
+            return await ctx.send("No results", delete_after=10)
+        await ctx.send(choice(results)["url"]) # get a truly randomly chosen gif
 
     @commands.command(name="xivdb")
     async def _xivdb(self, ctx, *, query: str):

@@ -40,6 +40,8 @@ async def on_message(message):
 
 async def init_coros():
     bot.session = aiohttp.ClientSession()
+    async with bot.session.get(f"https://api.tenor.com/v1/anonid?key={bot.config.tenor_key}") as r:
+        bot.anon_id = (await r.json())["anon_id"]
 
 if __name__ == "__main__":
     bot.loop.create_task(init_coros())
